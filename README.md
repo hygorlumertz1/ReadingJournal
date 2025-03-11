@@ -1,47 +1,43 @@
-## Nome: `Nome do aluno aqui`
+# Reading Journal - CRUD de Livros
 
-Para executar este projeto:
+Este é um projeto simples de um **Reading Journal**, onde os usuários podem adicionar, editar, excluir e listar livros, armazenando informações como título, autor, gênero e data de leitura.
 
-1. Entre pasta context-react-project no terminal:
-```
-cd exemplos/context-react-project
-```
+## Funcionalidades
 
-2. Rode npm install para instalar as dependências do projeto:
+- **Listar Livros**: Exibe uma lista de livros cadastrados.
+- **Adicionar Livro**: Permite ao usuário adicionar um novo livro à lista.
+- **Editar Livro**: Permite editar os detalhes de um livro existente.
+- **Excluir Livro**: Permite excluir um livro da lista.
+- **Buscar Livros**: Filtro de busca por título e autor.
 
+## Tecnologias Usadas
 
-```
+- **React**: Biblioteca para a construção da interface de usuário.
+- **React Router**: Gerenciamento de navegação entre páginas da aplicação.
+- **JavaScript (ES6+)**: Linguagem principal do projeto.
+- **Hooks do React**: `useState`, `useEffect`, `useParams`, `useNavigate`.
+
+## Como Rodar o Projeto
+
+### 1. Descompactar o arquivo ZIP
+
+Primeiro, extraia o conteúdo do arquivo ZIP que você recebeu para uma pasta de sua escolha.
+
+### 2. Navegar até o diretório do projeto
+No terminal, abra o diretório onde você descompactou o projeto:
+
+```bash
+cd caminho/para/o/diretorio
+
+### 3. Instalar dependecias
+Execute o seguinte comando para instalar as dependências necessárias do projeto:
+
+```bash
 npm install
-```
 
-3. E em seguida, npm start, para iniciar a execução do projeto.
+### 3. Rodar o Projeto
 
-```
+Agora, você pode rodar o projeto localmente com o comando:
+
+```bash
 npm start
-```
-
-Após execução do projeto, este é o resultado esperado no navegador:
-![Gif mostrando o resultado esperado ao rodar este projeto](./resultado.gif)
-
-## Introdução
-
-Este projeto contém uma estrutura básica a partir do template CRA, sem muitas alterações, com o objetivo de demostrar como compartilhar o estado de uma aplicação utilizando React Router e React Context API.
-
-## Componentes
-
-Os componentes estão no diretório `./src/components` e eles possuem as seguintes características:
-- ChildrenComponent:
-  - `props`
-    - items: um array com uma lista de dados para ser mostrado;
-    - onAdd: callback que é chamado quando o botão "Adicionar algo" é clicado;
-  - Descrição: este componente é uma simples demostração de como utilizar callback para adicionar itens em um array e como listar este array.
-
-- List:
-  - Descrição: este componente renderiza o ChildrenComponent a partir dos dados presentes no contexto e também é responsável por disparar as mudanças no contexto.
-
-- Navbar:
-  - Descrição: este componente utiliza Link do React Router para mostrar as páginas disponíveis em uma barra de navegação
-
-## Conclusão
-
-Este projeto é apenas para fins demonstrativos e não contém mais alterações do que as necessárias para demostrar algumas funcionalidades úteis para o desenvolvimento de projetos em ReactJS.

@@ -1,31 +1,30 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import "./NavBar.css";
 
 const NavBar = () => {
   const location = useLocation(); // Obtém a rota atual
 
   return (
-    <nav className="navbar">
+    <nav>
       <h2>Reading Journal</h2>
       <ul>
         <li>
-          <Link to="/" className={location.pathname === "/" ? "active" : ""}>
+          <Link to="/">
             Página Incial
           </Link>
         </li>
         <li>
-          <Link to="/books" className={location.pathname === "/books" ? "active" : ""}>
+          <Link to="/books">
             Lista de Livros
           </Link>
         </li>
         <li>
-          <Link to="/add" className={location.pathname === "/add" ? "active" : ""}>
+          <Link to="/add" >
             Cadastrar
           </Link>
         </li>
         <li>
-          <Link to="/about" className={location.pathname === "/about" ? "active" : ""}>
+          <Link to="/about" >
             Sobre
           </Link>
         </li>

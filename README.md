@@ -28,16 +28,19 @@ No terminal, abra o diretório onde você descompactou o projeto:
 
 ```bash
 cd caminho/para/o/diretorio
+```
 
 ### 3. Instalar dependecias
 Execute o seguinte comando para instalar as dependências necessárias do projeto:
 
 ```bash
 npm install
+```
 
-### 3. Rodar o Projeto
+### 4. Rodar o Projeto
 
 Agora, você pode rodar o projeto localmente com o comando:
 
 ```bash
 npm start
+```

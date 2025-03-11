@@ -47,24 +47,32 @@ const BookForm = ({ addBook, updateBook, books }) => {
         value={title}
         onChange={(e) => setTitle(e.target.value)} // Atualiza o título conforme o usuário digita
       />
+      <br>
+      </br>
       <input
         type="text"
         placeholder="Autor(a)"
         value={author}
         onChange={(e) => setAuthor(e.target.value)} // Atualiza o autor conforme o usuário digita
       />
+      <br>
+      </br>
       <input
         type="text"
         placeholder="Gênero"
         value={genre}
         onChange={(e) => setGenre(e.target.value)} // Atualiza o gênero conforme o usuário digita
       />
+      <br>
+      </br>
       <input
         type="text"
         placeholder="Data"
         value={date}
         onChange={(e) => setDate(e.target.value)} // Atualiza a data conforme o usuário digita
       />
+      <br>
+      </br>
       <button type="submit">
         {index !== undefined ? "Atualizar Livro" : "Adicionar Livro"} {/* Texto do botão depende de estar editando ou criando */}
       </button>

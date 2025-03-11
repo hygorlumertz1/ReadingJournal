@@ -1,21 +1,4 @@
-# Reading Journal - CRUD de Livros
-
-Este é um projeto simples de um **Reading Journal**, onde os usuários podem adicionar, editar, excluir e listar livros, armazenando informações como título, autor, gênero e data de leitura.
-
-## Funcionalidades
-
-- **Listar Livros**: Exibe uma lista de livros cadastrados.
-- **Adicionar Livro**: Permite ao usuário adicionar um novo livro à lista.
-- **Editar Livro**: Permite editar os detalhes de um livro existente.
-- **Excluir Livro**: Permite excluir um livro da lista.
-- **Buscar Livros**: Filtro de busca por título e autor.
-
-## Tecnologias Usadas
-
-- **React**: Biblioteca para a construção da interface de usuário.
-- **React Router**: Gerenciamento de navegação entre páginas da aplicação.
-- **JavaScript (ES6+)**: Linguagem principal do projeto.
-- **Hooks do React**: `useState`, `useEffect`, `useParams`, `useNavigate`.
+## Nome: `Hygor Olivio Lumertz`
 
 ## Como Rodar o Projeto
 
@@ -44,3 +27,22 @@ Agora, você pode rodar o projeto localmente com o comando:
 ```bash
 npm start
 ```
+
+## Reading Journal - CRUD de Livros
+
+Este é um projeto simples de um **Reading Journal**, onde os usuários podem adicionar, editar, excluir e listar livros, armazenando informações como título, autor, gênero e data de leitura.
+
+## Funcionalidades
+
+- **Listar Livros**: Exibe uma lista de livros cadastrados.
+- **Adicionar Livro**: Permite ao usuário adicionar um novo livro à lista.
+- **Editar Livro**: Permite editar os detalhes de um livro existente.
+- **Excluir Livro**: Permite excluir um livro da lista.
+- **Buscar Livros**: Filtro de busca por título e autor.
+
+## Tecnologias Usadas
+
+- **React**: Biblioteca para a construção da interface de usuário.
+- **React Router**: Gerenciamento de navegação entre páginas da aplicação.
+- **JavaScript (ES6+)**: Linguagem principal do projeto.
+- **Hooks do React**: `useState`, `useEffect`, `useParams`, `useNavigate`.

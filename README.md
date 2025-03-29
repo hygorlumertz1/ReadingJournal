@@ -46,3 +46,4 @@ Este é um projeto simples de um **Reading Journal**, onde os usuários podem ad
 - **React Router**: Gerenciamento de navegação entre páginas da aplicação.
 - **JavaScript (ES6+)**: Linguagem principal do projeto.
 - **Hooks do React**: `useState`, `useEffect`, `useParams`, `useNavigate`.
+- **@mui/material**: Framework de Ui uitlizado para estilização.

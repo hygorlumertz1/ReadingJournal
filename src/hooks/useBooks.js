@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const useBooks = () => {
-  const [books, ] = useState([]);
+  const [books, setBooks ] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 

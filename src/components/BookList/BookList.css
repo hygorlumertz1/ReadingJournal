@@ -1,0 +1,22 @@
+.book-list {
+  margin-top: 20px;
+}
+
+.book-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.book-list li {
+  margin-bottom: 15px;
+}
+
+.book-list button {
+  margin-right: 10px;
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}

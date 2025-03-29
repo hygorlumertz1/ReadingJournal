@@ -1,35 +1,21 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { AppBar, Toolbar, Typography, Button } from "@mui/material";
+import './NavBar.css';  // Importando o CSS para a NavBar
 
 const NavBar = () => {
-  const location = useLocation(); // Obtém a rota atual
-
   return (
-    <nav>
-      <h2>Reading Journal</h2>
-      <ul>
-        <li>
-          <Link to="/">
-            Página Incial
-          </Link>
-        </li>
-        <li>
-          <Link to="/books">
-            Lista de Livros
-          </Link>
-        </li>
-        <li>
-          <Link to="/add" >
-            Cadastrar
-          </Link>
-        </li>
-        <li>
-          <Link to="/about" >
-            Sobre
-          </Link>
-        </li>
-      </ul>
-    </nav>
+    <AppBar position="sticky" className="navbar">
+      <Toolbar>
+        <Typography variant="h6" style={{ flexGrow: 1 }}>
+          Reading Journal
+        </Typography>
+        <Button color="inherit" component={Link} to="/">Home</Button>
+        <Button color="inherit" component={Link} to="/books">Livros</Button>
+        <Button color="inherit" component={Link} to="/add">Adicionar</Button>
+        <Button color="inherit" component={Link} to="/about">Sobre</Button>
+      </Toolbar>
+    </AppBar>
   );
 };
 

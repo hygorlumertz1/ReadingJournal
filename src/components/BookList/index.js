@@ -1,61 +1,109 @@
-import React, { useState } from "react"; // Importando React e useState
-import { Link } from "react-router-dom"; // Importando Link para navegação entre páginas
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import useBooks from "../../hooks/useBooks"; // Importando o hook personalizado
+import { Button, Grid, List, ListItem, ListItemText, Typography, Divider, Pagination, FormControl, InputLabel, Select, MenuItem } from "@mui/material"; // Importando componentes do MUI
+import './BookList.css'; // Importando o CSS para a listagem de livros
 
-const BookList = ({ books, deleteBook }) => {
-  // Estado para armazenar o valor da busca
-  const [searchQuery, setSearchQuery] = useState("");
+const BookList = () => {
+  const { books, loading, error, deleteBook } = useBooks(); // Desestruturando os dados do hook
+  const [page, setPage] = useState(1); // Página atual
+  const [itemsPerPage, setItemsPerPage] = useState(5); // Itens por página
 
-  // Função chamada sempre que o usuário digita na barra de busca
-  const handleSearch = (e) => {
-    setSearchQuery(e.target.value); // Atualiza o estado da busca com o valor digitado
+  if (loading) {
+    return <Typography variant="h6">Carregando livros...</Typography>;
+  }
+
+  if (error) {
+    return <Typography variant="h6" color="error">{error}</Typography>;
+  }
+
+  // Função para lidar com a mudança de página
+  const handlePageChange = (event, value) => {
+    setPage(value);
   };
 
-  // Filtra os livros de acordo com a busca, verificando se o título ou autor contém o valor buscado
-  const filteredBooks = books.filter((book) =>
-    book.title.toLowerCase().includes(searchQuery.toLowerCase()) || // Pesquisa pelo título
-    book.author.toLowerCase().includes(searchQuery.toLowerCase()) // Pesquisa pelo autor
-  );
+  // Função para lidar com a mudança do número de itens por página
+  const handleItemsPerPageChange = (event) => {
+    setItemsPerPage(event.target.value);
+    setPage(1); // Resetando a página para 1 quando mudar o número de itens por página
+  };
+
+  // Função para exibir todos os itens
+  const handleShowAll = () => {
+    setItemsPerPage(books.length); // Definindo o número de itens por página como o total de livros
+    setPage(1); // Reinicia a página para a primeira
+  };
+
+  // Calculando os itens a serem exibidos na página atual
+  const indexOfLastBook = page * itemsPerPage;
+  const indexOfFirstBook = indexOfLastBook - itemsPerPage;
+  const currentBooks = books.slice(indexOfFirstBook, indexOfLastBook);
 
   return (
-    <div>
-      <h1>Lista de Livros</h1>
-
-      {/* Barra de pesquisa */}
-      <div>
-        <input
-          type="text"
-          placeholder="Buscar por título ou autor..."
-          value={searchQuery}
-          onChange={handleSearch} // Chama a função handleSearch sempre que o usuário digita
-        />
-      </div>
-
-      {/* Se não houver livros filtrados, mostra uma mensagem */}
-      {filteredBooks.length === 0 ? (
-        <p>Não há livros cadastrados ou não foram encontrados livros com essa busca.</p>
+    <div className="book-list">
+      <Typography variant="h4" gutterBottom>Lista de Livros</Typography>
+      {books.length === 0 ? (
+        <Typography variant="h6">Não há livros cadastrados.</Typography>
       ) : (
-        <ul>
-          {/* Mapeando e exibindo os livros filtrados */}
-          {filteredBooks.map((book, index) => (
-            <li key={index}>
-              <strong>{book.title}</strong> - {book.author} - {book.genre} - {book.date}
-              <div>
-                {/* Link para a página de edição do livro */}
-                <Link to={`/update/${index}`}>
-                  <button>Editar</button>
-                </Link>
-                {/* Botão para excluir o livro */}
-                <button onClick={() => deleteBook(index)}>Excluir</button>
+        <>
+          <Grid container spacing={2} justifyContent="flex-end">
+            <Grid item>
+              <Button variant="outlined" color="primary" onClick={handleShowAll}>
+                Exibir Todos
+              </Button>
+            </Grid>
+          </Grid>
+          
+          <List>
+            {currentBooks.map((book) => (
+              <div key={book.id}>
+                <ListItem>
+                  <ListItemText
+                    primary={<strong>{book.title}</strong>}
+                    secondary={`${book.author} - ${book.genre} - ${book.readAt}`}
+                  />
+                  <Grid container spacing={2}>
+                    <Grid item>
+                      <Button
+                        variant="outlined"
+                        color="primary"
+                        component={Link}
+                        to={`/update/${book.id}`}
+                      >
+                        Editar
+                      </Button>
+                    </Grid>
+                    <Grid item>
+                      <Button
+                        variant="outlined"
+                        color="secondary"
+                        onClick={() => deleteBook(book.id)}
+                      >
+                        Excluir
+                      </Button>
+                    </Grid>
+                  </Grid>
+                </ListItem>
+                <Divider />
               </div>
-            </li>
-          ))}
-        </ul>
+            ))}
+          </List>
+          
+          {itemsPerPage !== books.length && (  // Só exibe a paginação se não estiver mostrando todos os itens
+            <Pagination
+              count={Math.ceil(books.length / itemsPerPage)} // Número de páginas
+              page={page}
+              onChange={handlePageChange}
+              color="primary"
+              siblingCount={1} // Número de páginas ao lado da página atual
+              boundaryCount={1} // Número de páginas na borda
+              showFirstButton
+              showLastButton
+              style={{ marginTop: "20px", display: "flex", justifyContent: "center" }}
+            />
+          )}
+        </>
       )}
-
-      {/* Link para a página de adicionar um novo livro */}
-      <Link to="/add">
-        <button>Cadastrar Novo Livro</button>
-      </Link>
     </div>
   );
 };

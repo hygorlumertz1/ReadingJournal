@@ -1,81 +1,94 @@
-import React, { useState, useEffect } from "react"; // Importando React, useState e useEffect
-import { useParams, useNavigate } from "react-router-dom"; // Importando hooks de navegação
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import useBooks from "../../hooks/useBooks";
+import { TextField, Button, Grid, Typography } from "@mui/material";
+import './BookForm.css';
 
-const BookForm = ({ addBook, updateBook, books }) => {
-  // Estado para armazenar os campos do formulário
-  const [title, setTitle] = useState("");
-  const [author, setAuthor] = useState("");
-  const [genre, setGenre] = useState("");
-  const [date, setDate] = useState("");
+const BookForm = () => {
+  const [book, setBook] = useState({ title: "", author: "", genre: "", readAt: "" });
+  const { id } = useParams();
+  const { books, addBook, updateBook } = useBooks(); // Pegando funções do hook
+  const navigate = useNavigate();
 
-  // Obtendo o índice do livro da URL, se for uma edição
-  const { index } = useParams();
-  const navigate = useNavigate(); // Hook para navegação programática
-
-  // Efeito para carregar os dados do livro quando estamos editando
   useEffect(() => {
-    if (index !== undefined) {
-      const book = books[index]; // Obtém o livro com base no índice da URL
-      setTitle(book.title); // Preenche os campos do formulário com os dados do livro
-      setAuthor(book.author);
-      setGenre(book.genre);
-      setDate(book.date);
+    if (id) {
+      const bookToEdit = books.find((book) => book.id === parseInt(id));
+      if (bookToEdit) {
+        setBook(bookToEdit);
+      }
     }
-  }, [index, books]); // Efeito roda quando o índice ou os livros mudam
+  }, [id, books]);
 
-  // Função chamada quando o formulário é submetido
+  const handleChange = (e) => {
+    setBook({ ...book, [e.target.name]: e.target.value });
+  };
+
   const handleSubmit = (e) => {
-    e.preventDefault(); // Previne o comportamento padrão de envio do formulário
-
-    const book = { title, author, genre, date }; // Cria um objeto com os dados do livro
-
-    if (index !== undefined) {
-      updateBook(index, book); // Se estamos editando, chama a função de atualização
+    e.preventDefault();
+    if (id) {
+      updateBook(id, book);  // Atualiza livro se houver id
     } else {
-      addBook(book); // Se estamos adicionando, chama a função de adição
+      addBook(book);  // Adiciona novo livro
     }
-
-    navigate("/books"); // Após adicionar ou atualizar, redireciona para a lista de livros
+    navigate("/");
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      {/* Campos do formulário para adicionar ou editar livros */}
-      <input
-        type="text"
-        placeholder="Nome do livro"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)} // Atualiza o título conforme o usuário digita
-      />
-      <br>
-      </br>
-      <input
-        type="text"
-        placeholder="Autor(a)"
-        value={author}
-        onChange={(e) => setAuthor(e.target.value)} // Atualiza o autor conforme o usuário digita
-      />
-      <br>
-      </br>
-      <input
-        type="text"
-        placeholder="Gênero"
-        value={genre}
-        onChange={(e) => setGenre(e.target.value)} // Atualiza o gênero conforme o usuário digita
-      />
-      <br>
-      </br>
-      <input
-        type="text"
-        placeholder="Data"
-        value={date}
-        onChange={(e) => setDate(e.target.value)} // Atualiza a data conforme o usuário digita
-      />
-      <br>
-      </br>
-      <button type="submit">
-        {index !== undefined ? "Atualizar Livro" : "Adicionar Livro"} {/* Texto do botão depende de estar editando ou criando */}
-      </button>
+    <form onSubmit={handleSubmit} className="book-form">
+      <Typography variant="h4" gutterBottom>
+        {id ? "Atualizar Livro" : "Adicionar Livro"}
+      </Typography>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            label="Título"
+            name="title"
+            value={book.title}
+            onChange={handleChange}
+            required
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            label="Autor"
+            name="author"
+            value={book.author}
+            onChange={handleChange}
+            required
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            label="Gênero"
+            name="genre"
+            value={book.genre}
+            onChange={handleChange}
+            required
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            label="Data de Leitura"
+            name="readAt"
+            type="date"
+            value={book.readAt}
+            onChange={handleChange}
+            required
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Button variant="contained" color="primary" type="submit" fullWidth>
+            {id ? "Atualizar Livro" : "Adicionar Livro"}
+          </Button>
+        </Grid>
+      </Grid>
     </form>
   );
 };

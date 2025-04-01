@@ -30,7 +30,7 @@ const BookForm = () => {
     } else {
       addBook(book);  // Adiciona novo livro
     }
-    navigate("/");
+    navigate("/books");
   };
 
   return (

@@ -47,3 +47,13 @@ Este é um projeto simples de um **Reading Journal**, onde os usuários podem ad
 - **JavaScript (ES6+)**: Linguagem principal do projeto.
 - **Hooks do React**: `useState`, `useEffect`, `useParams`, `useNavigate`.
 - **@mui/material**: Framework de Ui uitlizado para estilização.
+
+## Telas da Aplicação
+- **Pagina inicial**
+![Texto alternativo](./public/paginaInicial.png)
+- **Lista dos livros**
+![Texto alternativo](./public/bookList.png)
+- **Formulário de cadastro**
+![Texto alternativo](./public/bookForm.png)
+- **Sobre**
+![Texto alternativo](./public/about.png)

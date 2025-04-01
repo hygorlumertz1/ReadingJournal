@@ -48,6 +48,8 @@ Este é um projeto simples de um **Reading Journal**, onde os usuários podem ad
 - **Hooks do React**: `useState`, `useEffect`, `useParams`, `useNavigate`.
 - **@mui/material**: Framework de Ui uitlizado para estilização.
 - **Cypress**: É uma ferramenta de teste de código aberto para aplicações web, focada principalmente em testes end-to-end (E2E).
+- **Axios**: Axios é uma biblioteca JavaScript baseada em Promises para realizar requisições HTTP. É amplamente utilizada para interagir com APIs em projetos web, permitindo enviar e receber dados de forma simples e eficiente.
+
 ## Telas da Aplicação
 - **Pagina inicial**
 ![Texto alternativo](./public/paginaInicial.png)

@@ -23,14 +23,21 @@ const BookForm = () => {
     setBook({ ...book, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (id) {
-      updateBook(id, book);  // Atualiza livro se houver id
-    } else {
-      addBook(book);  // Adiciona novo livro
+    try {
+      if (id) {
+        await updateBook(id, book);  // Atualiza livro se houver id
+      } else {
+        await addBook(book);  // Adiciona novo livro
+      }
+      // Pequeno delay para garantir que o estado foi atualizado
+      setTimeout(() => {
+        navigate("/books");
+      }, 100);
+    } catch (error) {
+      console.error("Erro ao salvar livro:", error);
     }
-    navigate("/books");
   };
 
   return (

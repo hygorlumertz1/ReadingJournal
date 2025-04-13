@@ -1,26 +1,38 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
 const useBooks = () => {
-  const [books, setBooks ] = useState([]);
+  const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const isMounted = useRef(false);
 
   // Carregar livros da API
   const fetchBooks = async () => {
     try {
       const response = await axios.get("http://localhost:5000/books");
-      setBooks(response.data);  // Atualiza a lista com os livros recebidos
+      if (isMounted.current) {
+        setBooks(response.data);
+      }
     } catch (err) {
-      setError("Erro ao carregar livros.");
-      console.error(err);
+      if (isMounted.current) {
+        setError("Erro ao carregar livros.");
+        console.error(err);
+      }
     } finally {
-      setLoading(false);
+      if (isMounted.current) {
+        setLoading(false);
+      }
     }
   };
 
   useEffect(() => {
-    fetchBooks(); // Carrega os livros na primeira renderização
+    isMounted.current = true;
+    fetchBooks();
+    
+    return () => {
+      isMounted.current = false;
+    };
   }, []);
 
   // Adicionar livro via API
@@ -37,6 +49,10 @@ const useBooks = () => {
   const updateBook = async (id, updatedBook) => {
     try {
       await axios.put("http://localhost:5000/books", updatedBook);
+      // Atualiza o estado local após a atualização bem-sucedida
+      setBooks(prevBooks => prevBooks.map(book => 
+        book.id === updatedBook.id ? updatedBook : book
+      ));
     } catch (err) {
       setError("Erro ao atualizar livro.");
       console.error(err);
